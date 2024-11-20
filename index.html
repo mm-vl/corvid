@@ -5,7 +5,7 @@
   <meta name="description"
         content="MLLMs towards Chain-of-Thought Reasoning">
   <meta name="keywords" content="MLLMs, CoT, Reasoning">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9">
   <title>corvid</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -22,8 +22,7 @@
     gtag('config', 'G-PYVRSFMDRL');
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
@@ -39,6 +38,7 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
+
 </head>
 <body>
 
@@ -229,6 +229,8 @@
 
 
 <!-- ===================================================================== -->
+
+<!-- ===================================================================== -->
 <section class="section">
   <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
@@ -236,43 +238,89 @@
     </div>
   </div>
 
-    <style>
-      body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          margin: 0;
-          padding: 0;
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .image-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        position: relative;
+    }
+    .image-container img {
+        width: 100%;
+        display: none;
+    }
+    .image-container img.active {
+        display: block;
+    }
+    .progress-bar {
+        width: 80%;
+        height: 20px;
+        margin: 20px auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .bar-container {
+        /* display: flex;
+        width: 100%;
+        height: 100%; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 500px;
+        height: 20px;
+        margin: 20px auto;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+    .bar-segment {
+        flex: 1;
+        height: 100%;
+        background-color: #cccccc;
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+        position: relative;
+    }
+    .bar-segment.active {
+        background-color: #007bff;
+    }
+    .bar-segment:not(:last-child) {
+        /* border-right: 1px solid #ffffff; */
+        border-right: 1px solid #ccc;
+    }
+    /* Add text or indicators on the segments */
+    .bar-segment::after {
+        content: attr(data-index); /* Use data-index for labels */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: #333;
       }
-      .image-container {
-          width: 100%;
-          max-width: 600px;
-          margin: 20px auto;
-          position: relative;
-      }
-      .image-container img {
-          width: 100%;
-          display: none;
-      }
-      .image-container img.active {
-          display: block;
-      }
-      .progress-bar {
-          width: 80%;
-          margin: 20px auto;
-      }
-      input[type="range"] {
-          width: 100%;
-      }
-    </style>
+  </style>
 
   <div class="container is-max-desktop">
+
     <div class="columns is-centered">
       <!-- math -->
       <div class="column">
         <div class="content">
           <h2 class="title is-4">Mathematical Reasoning</h2>
 
-          <div class="image-container">
+          <div class="image-container math-images">
               <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
               <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
               <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
@@ -280,7 +328,7 @@
               <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
           </div>
 
-          <div class="progress-bar">
+          <div class="progress-bar math-bar">
             <div class="bar-container">
               <div class="bar-segment active" data-index="E0"></div>
               <div class="bar-segment" data-index="E1"></div>
@@ -289,120 +337,65 @@
               <div class="bar-segment" data-index="E4"></div>
             </div>
           </div>
-
-          <script>
-              const images = document.querySelectorAll('.image-container img');
-              const segments = document.querySelectorAll('.bar-segment');
-
-              // Add click event to each segment to change the image
-              segments.forEach((segment, index) => {
-                  segment.addEventListener('click', () => {
-                      images.forEach((img, idx) => {
-                          img.classList.toggle('active', idx === index);
-                      });
-
-                      // Highlight the active segment
-                      segments.forEach(seg => seg.classList.remove('active'));
-                      segment.classList.add('active');
-                  });
-              });
-          </script>
-
         </div>
       </div>
-      <!--/ end. -->
+      <!--/ end math -->
 
       <!-- vision cognition. -->
       <div class="column">
-        <h2 class="title is-4">Vision Cognition</h2>
+        <div class="content"> 
+          <h2 class="title is-4">Vision Cognition</h2>
 
-        <div class="image-container">
-            <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
-            <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
-            <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
-            <img src="./static/images/demo/vis_cog4.png" alt="Image 4">
-            <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
-        </div>
+          <div class="image-container vision-images">
+              <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
+              <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
+              <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
+              <img src="./static/images/demo/vis_cog4.png" alt="Image 4">
+              <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
+          </div>
 
-        <div class="progress-bar">
-          <div class="bar-container">
-            <div class="bar-segment active" data-index="E0"></div>
-            <div class="bar-segment" data-index="E1"></div>
-            <div class="bar-segment" data-index="E2"></div>
-            <div class="bar-segment" data-index="E3"></div>
-            <div class="bar-segment" data-index="E4"></div>
+          <div class="progress-bar vision-bar">
+            <div class="bar-container">
+              <div class="bar-segment active" data-index="E0"></div>
+              <div class="bar-segment" data-index="E1"></div>
+              <div class="bar-segment" data-index="E2"></div>
+              <div class="bar-segment" data-index="E3"></div>
+              <div class="bar-segment" data-index="E4"></div>
+            </div>
           </div>
         </div>
-
-        <script>
-            const images = document.querySelectorAll('.image-container img');
-            const segments = document.querySelectorAll('.bar-segment');
-
-            // Add click event to each segment to change the image
-            segments.forEach((segment, index) => {
-                segment.addEventListener('click', () => {
-                    images.forEach((img, idx) => {
-                        img.classList.toggle('active', idx === index);
-                    });
-
-                    // Highlight the active segment
-                    segments.forEach(seg => seg.classList.remove('active'));
-                    segment.classList.add('active');
-                });
-            });
-        </script>
-
-        <style>
-        /* Progress bar container */
-        .bar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
-            height: 20px;
-            margin: 20px auto;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-            overflow: hidden;
-            border: 1px solid #ccc;
-        }
-
-        /* Each bar segment */
-        .bar-segment {
-            flex: 1;
-            height: 100%;
-            background-color: #d9d9d9;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        /* Add spacing between segments using a border */
-        .bar-segment:not(:last-child) {
-            border-right: 1px solid #ccc;
-        }
-
-        /* Highlight active segment */
-        .bar-segment.active {
-            background-color: #4CAF50; /* Highlight color */
-        }
-
-        /* Add text or indicators on the segments */
-        .bar-segment::after {
-            content: attr(data-index); /* Use data-index for labels */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 12px;
-            color: #333;
-        }
-      </style>
-
       </div>
+      <!--/ end cognition -->
     </div>
   </div>
+
+  <script>
+    // Function to handle switching logic
+    function setupBarSwitching(imageSelector, barSelector) {
+        const images = document.querySelectorAll(imageSelector);
+        const segments = document.querySelectorAll(barSelector);
+
+        // Add click event to each segment to change the image
+        segments.forEach((segment, index) => {
+            segment.addEventListener('click', () => {
+                images.forEach((img, idx) => {
+                    img.classList.toggle('active', idx === index);
+                });
+
+                // Highlight the active segment
+                segments.forEach(seg => seg.classList.remove('active'));
+                segment.classList.add('active');
+            });
+        });
+    }
+
+    // Set up switching for Mathematical Reasoning
+    setupBarSwitching('.math-images img', '.math-bar .bar-segment');
+
+    // Set up switching for Vision Cognition
+    setupBarSwitching('.vision-images img', '.vision-bar .bar-segment');
+  </script>
+
 </section>
 
 
@@ -411,11 +404,7 @@
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
-          <p>
-            This website is adapted from <a
-              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
+          <p>This website is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/">Creative  Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
         </div>
       </div>
