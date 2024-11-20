@@ -126,40 +126,8 @@
 </section>
 
 
-
 <!-- ===================================================================== -->
 <section class="section">
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/crow_mirrored.png"> CORVID: An MLLM with Powerful CoT Reasoning Capability</h2>
-    </div>
-  </div>
-<div class="container is-max-desktop">
-  <div class="columns is-centered">
-    <div class="column is-full-width">
-      <div class="content has-text-justified"> 
-        <p>
-          CORVID bridges <b>Hybrid Vision Encoder</b> with <b>LLM</b> via a meticulously designed connector, <b>GateMixer</b>, and is then trained using a two-stage strategy:
-          <ul type="1">
-            <li><b>Stage I: Multi-Grained Alignment Pretraining.</b> <span style="font-size: 95%;">Training GateMixer on <b>MGA-1M</b> to achieve semantic alignment and connection between image and text within textual embedding space.</span></li>
-            <li><b>Stage II: CoT-Enhanced Supervised Finetuning.</b> <span style="font-size: 95%;">Jointly training GateMixer and LLM on <b>CORVID-1M</b> to enable CORVID to perform chain-of-thought reasoning.</span></li> 
-            <!-- <li><b>Self-Verification Inference Approach.</b> Alleviating the issues of over-refinement on easy samples and under-refinement on hard ones during CORVID inference.  -->
-          </ul>
-          During inference, CORVID employ a <b>Self-Verification</b> approach to alleviate the issues of over-refinement on easy samples and under-refinement on hard ones. 
-        </p>
-      </div>
-      <centering>
-        <div style="text-align: center;">
-          <img id="teaser" width="90%" src="./static/images/corvid.png">     
-        </div>
-      </centering>           
-    </div>
-  </div>
-</section>
-
-
-<!-- ===================================================================== -->
-<section class="section" style="background-color:#efeff081">
   <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
       <h2 class="title is-3"><img id="painting_icon" width="2.%" src="./static/images/server-control_crop.png"> Training Data Curation</h2>
@@ -199,6 +167,38 @@
 
 <!-- ===================================================================== -->
 <section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/crow_mirrored.png"> CORVID: An MLLM with Powerful CoT Reasoning Capability</h2>
+    </div>
+  </div>
+<div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <div class="content has-text-justified"> 
+        <p>
+          CORVID bridges <b>Hybrid Vision Encoder</b> with <b>LLM</b> via a meticulously designed connector, <b>GateMixer</b>, and is then trained using a two-stage strategy:
+          <ul type="1">
+            <li><b>Stage I: Multi-Grained Alignment Pretraining.</b> <span style="font-size: 95%;">Training GateMixer on <b>MGA-1M</b> to achieve semantic alignment and connection between image and text within textual embedding space.</span></li>
+            <li><b>Stage II: CoT-Enhanced Supervised Finetuning.</b> <span style="font-size: 95%;">Jointly training GateMixer and LLM on <b>CORVID-1M</b> to enable CORVID to perform chain-of-thought reasoning.</span></li> 
+            <!-- <li><b>Self-Verification Inference Approach.</b> Alleviating the issues of over-refinement on easy samples and under-refinement on hard ones during CORVID inference.  -->
+          </ul>
+          During inference, CORVID employ a <b>Self-Verification</b> approach to alleviate the issues of over-refinement on easy samples and under-refinement on hard ones. 
+        </p>
+      </div>
+      <centering>
+        <div style="text-align: center;">
+          <img id="teaser" width="90%" src="./static/images/corvid.png">     
+        </div>
+      </centering>           
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===================================================================== -->
+<section class="section">
   <!-- Results. -->
   <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
@@ -228,7 +228,6 @@
 </section>
 
 
-<!-- ===================================================================== -->
 
 <!-- ===================================================================== -->
 <section class="section">
@@ -247,7 +246,7 @@
     }
     .image-container {
         width: 100%;
-        max-width: 600px;
+        max-width: 700px;
         margin: 20px auto;
         position: relative;
     }
@@ -314,11 +313,11 @@
 
   <div class="container is-max-desktop">
 
+    <!-- math -->
     <div class="columns is-centered">
-      <!-- math -->
       <div class="column">
         <div class="content">
-          <h2 class="title is-4">Mathematical Reasoning</h2>
+          <!-- <h2 class="title is-4">Mathematical Reasoning</h2> -->
 
           <div class="image-container math-images">
               <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
@@ -330,21 +329,23 @@
 
           <div class="progress-bar math-bar">
             <div class="bar-container">
-              <div class="bar-segment active" data-index="E0"></div>
-              <div class="bar-segment" data-index="E1"></div>
+              <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
               <div class="bar-segment" data-index="E3"></div>
               <div class="bar-segment" data-index="E4"></div>
+              <div class="bar-segment" data-index="E5"></div>
             </div>
           </div>
         </div>
       </div>
-      <!--/ end math -->
+    </div>
+    <!--/ end math -->
 
-      <!-- vision cognition. -->
+    <!-- vision cognition. -->
+    <div class="columns is-centered">
       <div class="column">
         <div class="content"> 
-          <h2 class="title is-4">Vision Cognition</h2>
+          <!-- <h2 class="title is-4">Vision Cognition</h2> -->
 
           <div class="image-container vision-images">
               <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
@@ -356,17 +357,18 @@
 
           <div class="progress-bar vision-bar">
             <div class="bar-container">
-              <div class="bar-segment active" data-index="E0"></div>
-              <div class="bar-segment" data-index="E1"></div>
+              <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
               <div class="bar-segment" data-index="E3"></div>
               <div class="bar-segment" data-index="E4"></div>
+              <div class="bar-segment" data-index="E5"></div>
             </div>
           </div>
         </div>
       </div>
-      <!--/ end cognition -->
     </div>
+    <!--/ end cognition -->
+
   </div>
 
   <script>
@@ -400,7 +402,10 @@
 
 
 <!-- ===================================================================== -->
-<footer class="footer">
+
+
+<!-- ===================================================================== -->
+<footer class="footer" style="background-color:#efeff081">
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content">
