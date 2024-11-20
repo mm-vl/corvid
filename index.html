@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="MLLMs towards Chain-of-Thought Reasoning">
+  <meta name="keywords" content="MLLMs, CoT, Reasoning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>corvid</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/crow_mirrored.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="title is-2 publication-title">CORVID <img id="painting_icon" width="4.5%" src="./static/images/crow_mirrored.png">: Improving Multimodal Large Language Models Towards Chain-of-Thought Reasoning</h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous CVPR submission</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Paper ID 8612</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://openreview.net/pdf?id=9BRc2jJoQk"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/mm-vl/CORVID"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                       <p style="font-size:16px">🤗</p>
+                  </span>
+                  <span>Dataset (Coming soon)</span>
+                  </a>
+              </span>
+              <!-- model Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:16px">🤗</p>
+                  </span>
+                  <span>Model (Coming soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================== -->
+<section class="section" style="background-color:#efeff081">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-six-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advancements in multimodal large language models (MLLMs) have demonstrated their exceptional performance in multimodal perception and understanding. However, current open-source MLLMs still face challenges in tasks that demand complex reasoning for decision-making or problem-solving, primarily due to their limited chain-of-thought (CoT) reasoning abilities. 
+            In this paper, we develop an MLLM with powerful CoT reasoning capability, dubbed CORVID. To this end, we first construct a multimodal instruction dataset, namely MCoT-Instruct, featuring 384K high-quality CoT responses. Subsequently, we equip CORVID with a hybrid vision encoder to sufficiently represent visual content and a meticulously designed modality connector (GateMixer) to better align visual representations with textual embeddings. CORVID is then trained in two consecutive stages for multi-grained alignment and CoT-formatted instruction learning. Finally, we propose a self-verification approach that adaptively determines whether to perform CoT reasoning based on instance difficulty, alleviating issues of over-refinement and under-refinement during inference. Extensive experiments across 15 multimodal benchmarks showcase that CORVID consistently outperforms open-source MLLMs within similar parameter scales, exhibiting particular superiority in mathematical reasoning, science problem solving, and vision cognition. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/crow_mirrored.png"> CORVID: An MLLM with Powerful CoT Reasoning Capability</h2>
+    </div>
+  </div>
+<div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <div class="content has-text-justified"> 
+        <p>
+          CORVID bridges <b>Hybrid Vision Encoder</b> with <b>LLM</b> via a meticulously designed connector, <b>GateMixer</b>, and is then trained using a two-stage strategy:
+          <ul type="1">
+            <li><b>Stage I: Multi-Grained Alignment Pretraining.</b> <span style="font-size: 95%;">Training GateMixer on <b>MGA-1M</b> to achieve semantic alignment and connection between image and text within textual embedding space.</span></li>
+            <li><b>Stage II: CoT-Enhanced Supervised Finetuning.</b> <span style="font-size: 95%;">Jointly training GateMixer and LLM on <b>CORVID-1M</b> to enable CORVID to perform chain-of-thought reasoning.</span></li> 
+            <!-- <li><b>Self-Verification Inference Approach.</b> Alleviating the issues of over-refinement on easy samples and under-refinement on hard ones during CORVID inference.  -->
+          </ul>
+          During inference, CORVID employ a <b>Self-Verification</b> approach to alleviate the issues of over-refinement on easy samples and under-refinement on hard ones. 
+        </p>
+      </div>
+      <centering>
+        <div style="text-align: center;">
+          <img id="teaser" width="90%" src="./static/images/corvid.png">     
+        </div>
+      </centering>           
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================== -->
+<section class="section" style="background-color:#efeff081">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="2.%" src="./static/images/server-control_crop.png"> Training Data Curation</h2>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <p>We initially construct a multimodal CoT-formatted instruction dataset, <b>MCoT-Instruct</b>, and then introduce two datasets: <b>MAG-1M</b> and <b>CORVID-1M</b>, to support the alignment pre-training and CoT-enhanced supervised finetuning of MLLMs.
+          </p>
+
+          <p>
+            <centering>
+              <div style="text-align: center;">
+                <img width="100%" src="static/images/dataset.png">     
+              </div>
+            </centering>
+            <b>&#x25B6 Summary of (a) pretraining data, (b) our CoT-formatted instruction data, and (c) finetuning data.</b> Numbers in parentheses represent the number of conversation instances used for each dataset. 
+          </p>    
+          <p>
+            <centering>
+              <div style="text-align: center;">
+                <img id="teaser" width="98%" src="static/images/mcot_example.png">     
+              </div>
+            </centering>
+            <b>&#x25B6 Examples of the rewritten CoTs in MCoT-Instruct.</b> Compared with the raw CoTs, our rewritten CoTs remain faithful to the given multimodal context but are more detailed and logically coherent. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===================================================================== -->
+<section class="section">
+  <!-- Results. -->
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="static/images/evaluation.png"> Overall Performance</h2>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content has-text-justified">
+          <p>CORVID is evaluated on 15 multimodal benchmarks, assessing its <b>comprehensive performance</b>, <b>vision-centric</b> understanding, and various <b>complex reasoning</b> capabilities.
+          </p>
+          <p>
+            <centering>
+              <div style="text-align: center;">
+                <img width="100%" src="static/images/sota.png">     
+              </div>
+            </centering>
+            &#x25B6 CORVID consistently outperforms leading MLLMs within the same parameter tier across all benchmarks.
+            <!-- , demonstrating particular superiority in mathematical reasoning, science problem solving, and vision cognition.  -->
+          </p>  
+        </div>
+      </div>        
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================== -->
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-six-fifths">
+      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/supply-chain.png"> CoT Response Demonstration</h2>
+    </div>
+  </div>
+
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+      }
+      .image-container {
+          width: 100%;
+          max-width: 600px;
+          margin: 20px auto;
+          position: relative;
+      }
+      .image-container img {
+          width: 100%;
+          display: none;
+      }
+      .image-container img.active {
+          display: block;
+      }
+      .progress-bar {
+          width: 80%;
+          margin: 20px auto;
+      }
+      input[type="range"] {
+          width: 100%;
+      }
+    </style>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <!-- math -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">Mathematical Reasoning</h2>
+
+          <div class="image-container">
+              <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
+              <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
+              <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
+              <img src="./static/images/demo/vis_cog4.png" alt="Image 4">
+              <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
+          </div>
+
+          <div class="progress-bar">
+            <div class="bar-container">
+              <div class="bar-segment active" data-index="E0"></div>
+              <div class="bar-segment" data-index="E1"></div>
+              <div class="bar-segment" data-index="E2"></div>
+              <div class="bar-segment" data-index="E3"></div>
+              <div class="bar-segment" data-index="E4"></div>
+            </div>
+          </div>
+
+          <script>
+              const images = document.querySelectorAll('.image-container img');
+              const segments = document.querySelectorAll('.bar-segment');
+
+              // Add click event to each segment to change the image
+              segments.forEach((segment, index) => {
+                  segment.addEventListener('click', () => {
+                      images.forEach((img, idx) => {
+                          img.classList.toggle('active', idx === index);
+                      });
+
+                      // Highlight the active segment
+                      segments.forEach(seg => seg.classList.remove('active'));
+                      segment.classList.add('active');
+                  });
+              });
+          </script>
+
+        </div>
+      </div>
+      <!--/ end. -->
+
+      <!-- vision cognition. -->
+      <div class="column">
+        <h2 class="title is-4">Vision Cognition</h2>
+
+        <div class="image-container">
+            <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
+            <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
+            <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
+            <img src="./static/images/demo/vis_cog4.png" alt="Image 4">
+            <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
+        </div>
+
+        <div class="progress-bar">
+          <div class="bar-container">
+            <div class="bar-segment active" data-index="E0"></div>
+            <div class="bar-segment" data-index="E1"></div>
+            <div class="bar-segment" data-index="E2"></div>
+            <div class="bar-segment" data-index="E3"></div>
+            <div class="bar-segment" data-index="E4"></div>
+          </div>
+        </div>
+
+        <script>
+            const images = document.querySelectorAll('.image-container img');
+            const segments = document.querySelectorAll('.bar-segment');
+
+            // Add click event to each segment to change the image
+            segments.forEach((segment, index) => {
+                segment.addEventListener('click', () => {
+                    images.forEach((img, idx) => {
+                        img.classList.toggle('active', idx === index);
+                    });
+
+                    // Highlight the active segment
+                    segments.forEach(seg => seg.classList.remove('active'));
+                    segment.classList.add('active');
+                });
+            });
+        </script>
+
+        <style>
+        /* Progress bar container */
+        .bar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            height: 20px;
+            margin: 20px auto;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        /* Each bar segment */
+        .bar-segment {
+            flex: 1;
+            height: 100%;
+            background-color: #d9d9d9;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Add spacing between segments using a border */
+        .bar-segment:not(:last-child) {
+            border-right: 1px solid #ccc;
+        }
+
+        /* Highlight active segment */
+        .bar-segment.active {
+            background-color: #4CAF50; /* Highlight color */
+        }
+
+        /* Add text or indicators on the segments */
+        .bar-segment::after {
+            content: attr(data-index); /* Use data-index for labels */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: #333;
+        }
+      </style>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================== -->
+<footer class="footer">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================================================================== -->
+</body>
+</html>
