@@ -38,32 +38,95 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
+  <style>
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+    
+    .video-background video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .hero {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .custom-list {
+        list-style-type: none !important;
+        list-style: none !important;
+        padding-left: 0 !important;
+        margin-left: 16px !important;
+        margin-top: -8px !important;
+    }
+    .custom-list li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 10px;
+        list-style: none !important;
+        list-style-type: none !important;
+        text-align: left;
+    }
+    .custom-list li::before {
+        content: "◎";
+        position: absolute;
+        left: 0;
+        font-weight: bold;
+        color: #000;
+    }
+  </style>
+
 </head>
 
 <body>
 
 <!-- ===================================================================== -->
 <section class="hero">
-  <!-- <div class="video-background">
-    <video autoplay loop muted playsinline>
-      <source src="./demo/math_reasoning_video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div> -->
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h2 class="title is-2 publication-title" style="text-transform: none; color: #4682B4; font-family: 'Georgia', serif;">CORVID <img id="painting_icon" width="4.5%" src="./static/images/crow_mirrored.png"></h2> 
+          <h2 class="title is-2 publication-title" style="text-transform: none; color: #4682B4; font-family: 'Georgia', serif;">Corvid <img id="painting_icon" width="4.5%" src="./static/images/crow_mirrored.png"></h2> 
           <div class="title is-3 publication-title" style="color: black; font-family: 'Georgia', serif;">Improving Multimodal Large Language Models Towards<br>Chain-of-Thought Reasoning
           </div>
-          <div class="is-size-4 publication-authors">
-            <!-- <span class="author-block">Anonymous CVPR submission</span> -->
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=p9T7ieAAAAAJ">Jingjing Jiang</a><sup>1,2</sup>,</span>
+            <span class="author-block">
+              <a href=https://scholar.google.com/citations?user=syoPhv8AAAAJ>Chao Ma</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="javascript:void(0)">Xurui Song</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href=https://scholar.google.com/citations?user=YG0DFyYAAAAJ>Hanwang Zhang</a><sup>2</sup>,
+            </span>    
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=qXLjz30AAAAJ">Jun Luo</a><sup>2</sup>
+            </span>
           </div>
 
-          <!-- <div class="is-size-5 publication-authors">
-            <span class="author-block">Paper ID 8612</span>
-          </div> -->
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup> Shanghai Jiao Tong University, <sup>2</sup>Nanyang Technological University</span>
+            </span>
+          </div>
+          
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><b>ICCV 2025 </b></font></span>
+          </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
@@ -76,9 +139,19 @@
                   <span>Paper</span>
                 </a>
               </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/collections/mm-vl/corvid-686f6591f2ea83dcb94c8e46"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                       <p style="font-size:16px">🤗</p>
+                  </span>
+                  <span>HF Collections</span>
+                </a>
+              </span>
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/mm-vl/corvid_ws"
+                <a href="https://github.com/mm-vl/corvid"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -86,26 +159,84 @@
                   <span>Code</span>
                 </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/datasets/mm-vl/Corvid-dataset/tree/main"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                       <p style="font-size:16px">🤗</p>
-                  </span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-              <!-- model Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/mm-vl/Corvid-Llama3.1-8B/tree/main"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:16px">🤗</p>
-                  </span>
-                  <span>Model</span>
-                </a>
-              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-centered">  
+        <div class="column has-text-centered">
+          <centering>
+            <div style="text-align: center;">
+              <img id="teaser" width="90%" src="./static/images/overview.jpg" alt="corvid Overview">     
+            </div>
+          </centering>
+          <p class="has-text-left" style="width: 100%; margin: 0 auto;font-family: 'Georgia', sans-serif;">
+            &#x25C8; Corvid is an MLLM with enhanced CoT reasoning capabilities. Architecturally, it incorporates a hybrid vision encoder for informative visual representation and a meticulously designed connector (GateMixer) to facilitate cross-modal alignment. During inference, Corvid implements a self-verification strategy to mitigate <i>over-reasoning on easy samples</i> and <i>under-reasoning on hard ones</i>. 
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================================================================== -->
+<!-- <video id="video1" autoplay muted playsinline controls style="display: block; margin: 0 auto; max-width: 80%; max-height: 500px; border: 6px solid #4682B4; border-radius: 18px;">
+  <source src="./static/images/demo/corvid_cot_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video> -->
+
+
+<!-- ===================================================================== -->
+<!-- <section class="section" style="background-color:#efeff081"> -->
+<!-- <section class="section">
+  <div class="container is-max-desktop">
+    <centering>
+      <div style="text-align: center;">
+        <img id="teaser" width="90%" src="./static/images/overview.jpg" alt="CORVID Overview">     
+      </div>
+    </centering>
+  </div>
+</section>  -->
+
+
+
+<!-- ===================================================================== -->
+<div style="background-color: #f0f0f0; width: 100%; padding: 1em 0; text-align: center;">
+  <h3 class="title is-3">
+    <img src="./static/images/agile.png" style="width:1.2em; vertical-align: middle" alt="corvid"/>
+    <span class="corvid" style="vertical-align: middle;font-family: 'Georgia', serif;" id="corvid">Training Data Curation and Procedure<span>
+  </h3>
+</div>
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width" style="font-family: 'Georgia', serif;">
+        <div class="content has-text-justified">
+          <div class="centered-content">
+            <div class="text-block">
+              <p  style="font-size: 110%;">
+                <strong style="text-transform: none; color: #0066CC; font-family: 'Book Antiqua', serif; font-weight: 2000;font-size: 103%;">&#x25C9; <b>Training Data Curation.</b></strong> We initially construct a multimodal CoT-formatted instruction dataset, <b>MCoT-Instruct</b>, and subsequently introduce <b>MAG-1M</b>, <b>Corvid-1M</b>, and <b>o1-320K</b> to support the three-stage training of Corvid.
+              </p>
+            </div>
+            <br>
+            <div class="image-block" style="text-align: center;">
+              <img src="static/images/dataset.png" style="max-width: 92%; height: auto;" alt="Dataset Image">
+              <div class="caption">
+                <b>&#x25C8; Source data summary.</b> Numbers in parentheses represent the number of conversation instances used for each dataset.
+              </div>
+            </div>
+            <br>
+            <div class="text-block">
+              <p style="font-size: 110%;">
+                <strong style="text-transform: none; color: #0066CC; font-family: 'Book Antiqua', serif; font-weight: 2000;font-size: 103%;">&#x25C9; <b>Training Procedure.</b></strong> Corvid undergoes the following three-stage training:
+                <ul class="custom-list" style="font-size: 95%;">
+                  <li><b>Stage 1: Multi-Grained Alignment Pretraining.</b> Training GateMixer on <b>MGA-1M</b> to achieve semantic alignment and connection between image and text within textual embedding space.</li>
+                  <li><b>Stage 2: CoT-Enhanced Supervised Fine-tuning.</b> Jointly training GateMixer and LLM on <b>Corvid-1M</b> to enable Corvid to follow instructions and perform CoT reasoning.</li> 
+                  <li><b>Stage 3: Pure-CoT Instruction Tuning.</b> Training Corvid on <b>o1-320K</b> to further strengthen its reasoning capability. 
+                </ul>
+              </p>
             </div>
           </div>
         </div>
@@ -113,189 +244,6 @@
     </div>
   </div>
 </section>
-
-<style>
-.video-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.video-background video {
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-}
-.hero {
-  position: relative;
-  z-index: 1;
-}
-</style>
-
-
-<!-- ===================================================================== -->
-<video id="video1" autoplay muted playsinline controls style="display: block; margin: 0 auto; max-width: 80%; max-height: 500px; border: 6px solid #4682B4; border-radius: 18px;">
-  <source src="./static/images/demo/corvid_cot_video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<!-- <video id="video1" autoplay muted playsinline controls style="width: 45%; border: 3px solid #4682B4; border-radius: 10px;">
-  <source src="./demo/corvid_cot_video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video> -->
-
-<!-- <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column" id="video-container1">
-        <video id="video1" autoplay muted playsinline controls style="width: 100%; border: 3px solid #ccc; border-radius: 10px;">
-          <source src="./demo/corvid_cot_video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-  </div>
-</section> -->
-
-<!-- <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-three-fifths" id="video-container1">
-        <video id="video1" autoplay muted playsinline controls style="width: 100%; border: 4px solid #ccc; border-radius: 10px;">
-          <source src="./demo/corvid_cot_math_video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-      
-      <div class="column is-three-fifths" id="video-container1">
-        <video id="video1" autoplay muted playsinline controls style="width: 100%; border: 4px solid #ccc; border-radius: 10px;">
-          <source src="./demo/corvid_cot_science_video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-
-    </div>
-  </div>
-</section> -->
-
-
-<!-- ===================================================================== -->
-<!-- <section class="section" style="background-color:#efeff081"> -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths" style="font-family: 'Georgia', serif;">
-        <h3 class="title is-3">Abstract</h3>
-        <div class="content has-text-justified">
-          <p>
-            Recent advancements in multimodal large language models (MLLMs) have demonstrated their exceptional performance in multimodal perception and understanding.             
-            However, current open-source MLLMs still face challenges in tasks that demand complex reasoning for decision-making or problem-solving, primarily due to their limited chain-of-thought (CoT) reasoning abilities.
-          </p>
-          <p>
-            In this paper, we develop an MLLM with powerful CoT reasoning capability, dubbed <b>CORVID</b>. To this end, we first construct a multimodal instruction dataset, namely <b>MCoT-Instruct</b>, featuring 384K high-quality CoT responses. Subsequently, we equip CORVID with a hybrid vision encoder to sufficiently represent visual content and a meticulously designed modality connector (<b>GateMixer</b>) to better align visual representations with textual embeddings. CORVID is then trained in two consecutive stages for multi-grained alignment and CoT-formatted instruction learning. Finally, we propose a <b>self-verification</b> approach that adaptively determines whether to perform CoT reasoning based on instance difficulty, alleviating issues of over-refinement and under-refinement during inference. 
-          </p>
-          <p>
-            Extensive experiments across 15 multimodal benchmarks showcase that CORVID consistently outperforms open-source MLLMs within similar parameter scales, exhibiting particular superiority in mathematical reasoning, science problem solving, and vision cognition. 
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ===================================================================== -->
-<div style="background-color: #f0f0f0; width: 100%; padding: 1em 0; text-align: center;">
-  <h3 class="title is-3">
-    <img src="./static/images/agile.png" style="width:1.2em; vertical-align: middle" alt="corvid"/>
-    <span class="corvid" style="vertical-align: middle;font-family: 'Georgia', serif;" id="corvid">CORVID: An MLLM with CoT Reasoning Capability<span>
-  </h3>
-</div>
-<section class="section">
-  <!-- <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/agile.png"> CORVID: An MLLM with CoT Reasoning Capability</h2>
-    </div>
-  </div> -->
-<div class="container is-max-desktop">
-  <div class="columns is-centered">
-    <div class="column is-full-width">
-      <div class="content has-text-justified" style="font-family: 'Georgia', serif;"> 
-        <p>
-          CORVID integrates a meticulously designed <b>GateMixer</b> to bridge <b>Hybrid Vision Encoder</b> and <b>LLM</b> and undergoes the following two-stage training:
-          <ul type="1">
-            <li><b>Stage I: Multi-Grained Alignment Pretraining.</b> <span style="font-size: 95%;">Training GateMixer on <b>MGA-1M</b> to achieve semantic alignment and connection between image and text within textual embedding space.</span></li>
-            <li><b>Stage II: CoT-Enhanced Supervised Finetuning.</b> <span style="font-size: 95%;">Jointly training GateMixer and LLM on <b>CORVID-1M</b> to enable CORVID to perform chain-of-thought reasoning.</span></li> 
-            <!-- <li><b>Self-Verification Inference Approach.</b> Alleviating the issues of over-refinement on easy samples and under-refinement on hard ones during CORVID inference.  -->
-          </ul>
-          <p> 
-            During inference, CORVID employ a <b>Self-Verification</b> approach to alleviate the issues of <i>over-refinement on easy samples</i> and <i>under-refinement on hard ones</i>. 
-          </p>
-        </p>
-        <centering>
-          <div style="text-align: center;">
-            <img id="teaser" width="90%" src="./static/images/corvid.png">     
-          </div>
-        </centering>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ===================================================================== -->
-<div style="background-color: #f0f0f0; width: 100%; padding: 1em 0; text-align: center;">
-  <h3 class="title is-3">
-    <img src="./static/images/server-control_crop.png" style="width:1.2em; vertical-align: middle" alt="corvid"/>
-    <span class="corvid" style="vertical-align: middle;font-family: 'Georgia', serif;" id="corvid">Training Data Curation<span>
-  </h3>
-</div>
-<section class="section">
-  <!-- <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="2.%" src="./static/images/server-control_crop.png"> Training Data Curation</h2>
-    </div>
-  </div> -->
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-full-width"  style="font-family: 'Georgia', serif;">
-        <div class="content has-text-justified">
-          <p>We initially construct a multimodal CoT-formatted instruction dataset, <b>MCoT-Instruct</b>, and then introduce <b>MAG-1M</b> and <b>CORVID-1M</b> to support the alignment pre-training and CoT-enhanced supervised finetuning of MLLMs.
-          </p>
-
-          <p>
-            <centering>
-              <div style="text-align: center;">
-                <img style="max-width: 100%; height: auto;" src="static/images/dataset.png" alt="Dataset Image">     
-              </div>
-            </centering>
-            <b>&#x25B6 Source data summary.</b> Numbers in parentheses represent the number of conversation instances used for each dataset. 
-          </p>    
-          <!-- <p>
-            <centering>
-              <div style="text-align: center;">
-                <img id="teaser" width="98%" src="static/images/mcot_example.png">     
-              </div>
-            </centering>
-            <b>&#x25B6 Examples of the rewritten CoTs in MCoT-Instruct.</b> Compared with the raw CoTs, our rewritten CoTs remain faithful to the given multimodal context but are more detailed and logically coherent. 
-          </p> -->
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 
 <!-- ===================================================================== -->
@@ -306,31 +254,26 @@
   </h3>
 </div>
 <section class="section">
-  <!-- Results. -->
-  <!-- <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="static/images/result.png"> Overall Performance</h2>
-    </div>
-  </div> -->
-
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width" style="font-family: 'Georgia', serif;">
         <div class="content has-text-justified">
-          <p>CORVID is evaluated on 15 multimodal benchmarks, assessing its <b>comprehensive performance</b>, <b>vision-centric</b> understanding, and various <b>complex reasoning</b> capabilities. 
-          CORVID consistently outperforms leading MLLMs within the same parameter tier across all benchmarks. 
-          </p>
-          <p>
-            <centering>
-              <div style="text-align: center;">
-                <img width="100%" src="static/images/sota.png">     
+          <div class="centered-content">
+            <div class="text-block">
+              <p class="has-text-left" style="font-size: 110%;">
+                <strong style="text-transform: none; color: #0066CC; font-family: 'Book Antiqua', serif; font-weight: 2000;font-size: 103%;">&#x25C9; <b>Evaluation on Multimodal Reasoning Benchmarks.</b></strong> Corvid is evaluated on nine benchmarks to assess its problem-solving and mathematical reasoning capabilities. 
+              </p>
+            </div>
+            <br>
+            <div class="image-block" style="text-align: center;">
+              <img src="static/images/sota.png" style="max-width: 80%; height: auto;" alt="Dataset Image">
+              <div class="caption">
+                <b>&#x25C8; Comparison with state-of-the-art MLLMs on multimodal reasoning benchmarks.</b> 
               </div>
-            </centering>
-            <!-- &#x25B6 CORVID consistently outperforms leading MLLMs within the same parameter tier across all benchmarks. -->
-            <!-- , demonstrating particular superiority in mathematical reasoning, science problem solving, and vision cognition.  -->
-          </p>  
+            </div>
+          </div>
         </div>
-      </div>        
+      </div>
     </div>
   </div>
 </section>
@@ -341,40 +284,54 @@
 <div style="background-color: #f0f0f0; width: 100%; padding: 1em 0; text-align: center;">
   <h3 class="title is-3">
     <img src="./static/images/supply-chain.png" style="width:1.2em; vertical-align: middle" alt="corvid"/>
-    <span class="corvid" style="vertical-align: middle;font-family: 'Georgia', serif;" id="corvid">CoT Response Demonstration<span>
+    <span class="corvid" style="vertical-align: middle;font-family: 'Georgia', serif;" id="corvid">Corvid's Response Demonstration<span>
   </h3>
 </div>
 <section class="section">
-  <!-- <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="2.5%" src="./static/images/supply-chain.png"> CoT Response Demonstration</h2>
-    </div>
-  </div> -->
-
   <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: Garamond, serif;
         text-align: center;
         margin: 0;
         padding: 0;
     }
+
+    .column {
+        display: flex;
+        flex-direction: column;
+    }
+    .columns.is-centered {
+        justify-content: center;
+        align-items: flex-end;
+    }
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center;  */
+    }
+    
     .image-container {
         width: 100%;
         max-width: 700px;
         margin: 20px auto;
         position: relative;
+        flex-grow: 1;           
+        display: flex;           
+        flex-direction: column;  
+        justify-content: flex-start;
     }
     .image-container img {
-        /* width: 103%; */
         width: 520px;
-        height: auto; /* 自动调整高度，保持宽高比 */
-        max-width: 800px; /* 设置最大宽度限制 */
+        height: auto;  
+        max-width: 700px;  
         display: none;
         object-fit: contain;  
     }
     .image-container img.active {
         display: block;
     }
+
     .progress-bar {
         width: 80%;
         height: 20px;
@@ -385,6 +342,7 @@
         background-color: #f0f0f0;
         border-radius: 5px;
         overflow: hidden;
+        margin-top: auto;
     }
     .bar-container {
         /* display: flex;
@@ -426,31 +384,24 @@
         transform: translate(-50%, -50%);
         font-size: 12px;
         color: #333;
-      }
+    }
+
   </style>
 
   <div class="container is-max-desktop" style="font-family: 'Georgia', serif;">
-    <div class="columns is-centered">
+    <div class="columns is-centered first-row">
 
       <div class="column">
         <div class="content">
-
           <div class="image-container math-images">
             <h4 class="image-title">Mathematical Reasoning</h4>
             <img src="./static/images/demo/math1.png" alt="Image 1" class="active">
             <img src="./static/images/demo/math2.png" alt="Image 2">
-            <img src="./static/images/demo/math3.png" alt="Image 3">
-            <img src="./static/images/demo/math4.png" alt="Image 4">
-            <img src="./static/images/demo/math5.png" alt="Image 5">
           </div>
-
           <div class="progress-bar math-bar">
             <div class="bar-container">
               <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
-              <div class="bar-segment" data-index="E3"></div>
-              <div class="bar-segment" data-index="E4"></div>
-              <div class="bar-segment" data-index="E5"></div>
             </div>
           </div>
         </div>
@@ -458,23 +409,15 @@
 
       <div class="column">
         <div class="content"> 
-
           <div class="image-container vision-images">
             <h4 class="image-title">Vision Cognition</h4>
             <img src="./static/images/demo/vis_cog1.png" alt="Image 1" class="active">
             <img src="./static/images/demo/vis_cog2.png" alt="Image 2">
-            <img src="./static/images/demo/vis_cog3.png" alt="Image 3">
-            <img src="./static/images/demo/vis_cog4.png" alt="Image 4">
-            <img src="./static/images/demo/vis_cog5.png" alt="Image 5">
           </div>
-
           <div class="progress-bar vision-bar">
             <div class="bar-container">
               <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
-              <div class="bar-segment" data-index="E3"></div>
-              <div class="bar-segment" data-index="E4"></div>
-              <div class="bar-segment" data-index="E5"></div>
             </div>
           </div>
         </div>
@@ -486,19 +429,15 @@
 
       <div class="column">
         <div class="content">
-
           <div class="image-container science-images">
-            <h4 class="image-title">Physics Problem Solving</h4>
+            <h4 class="image-title">Problem Solving</h4>
             <img src="./static/images/demo/science1.png" alt="Image 1" class="active">
             <img src="./static/images/demo/science2.png" alt="Image 2">
-            <img src="./static/images/demo/science3.png" alt="Image 3">
           </div>
-
           <div class="progress-bar science-bar">
             <div class="bar-container">
               <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
-              <div class="bar-segment" data-index="E3"></div>
             </div>
           </div>
         </div>
@@ -506,26 +445,21 @@
 
       <div class="column">
         <div class="content"> 
-
           <div class="image-container perception-images">
-            <h4 class="image-title">Problem Solving</h4>
-            <img src="./static/images/demo/science4.png" alt="Image 1" class="active">
-            <img src="./static/images/demo/science5.png" alt="Image 2">
-            <img src="./static/images/demo/science6.png" alt="Image 3">
+            <h4 class="image-title">Failure Case</h4>
+            <img src="./static/images/demo/fcase1.png" alt="Image 1" class="active">
+            <img src="./static/images/demo/fcase2.png" alt="Image 2">
           </div>
-
           <div class="progress-bar perception-bar">
             <div class="bar-container">
               <div class="bar-segment active" data-index="E1"></div>
               <div class="bar-segment" data-index="E2"></div>
-              <div class="bar-segment" data-index="E3"></div>
             </div>
           </div>
         </div>
       </div>
 
     </div>
-
   </div>
 
   <script>
@@ -565,7 +499,21 @@
 
 
 <!-- ===================================================================== -->
-
+<section class="section" style="text-align: left;" id="BibTeX">
+<div class="container is-max-desktop content">
+<h2 class="title">BibTeX</h2>
+<pre style="text-align: left;">
+  <code>
+  @inproceedings{jiang2025corvid,
+     title={Corvid: Improving Multimodal Large Language Models Towards Chain-of-Thought Reasoning},
+     author={Jiang, Jingjing and Ma, Chao and Song, Xurui and Zhang, Hanwang and Luo, Jun},
+     booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision},
+     year={2025}
+  }
+  </code>
+</pre>
+</div>
+</section>
 
 <!-- ===================================================================== -->
 <footer class="footer" style="background-color:#efeff081">
