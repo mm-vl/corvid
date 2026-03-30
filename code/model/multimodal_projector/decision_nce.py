@@ -1,0 +1,110 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+
+def get_reward_matrix_P(p_e_s, p_e_text, logit_scale=100.):
+    p_e_s = p_e_s.transpose(0, 1)  # -> F B D
+    p_e_s = p_e_s / p_e_s.norm(dim=-1, keepdim=True)
+
+    p_e_text = p_e_text / p_e_text.norm(dim=-1, keepdim=True)  # B, D
+
+    frame_logits = p_e_s @ p_e_text.t()  # F B D @ D B -> F B B
+    pre_frames, later_frames = torch.chunk(frame_logits, 2, dim=0)
+    diff = later_frames - pre_frames
+
+    reward_matrix = torch.sum(diff, dim=0) * logit_scale
+    return reward_matrix
+
+
+def get_reward_matrix_T(p_e_s, p_e_text, logit_scale=100.):
+    p_e_s = p_e_s.transpose(0, 1)  # -> F B D
+    diff = p_e_s[1:] - p_e_s[:-1]  # -> F-1, B, D
+    eps = torch.finfo(p_e_s.dtype).eps  # 根据张量的精度选择最小值
+    diff = diff / (diff.norm(dim=-1, keepdim=True) + eps)
+
+    p_e_text = p_e_text / p_e_text.norm(dim=-1, keepdim=True)
+    frame_logits = diff @ p_e_text.t() * logit_scale  # F-1 B D @ D B -> F-1 B B
+    reward_matrix = torch.sum(frame_logits, dim=0)
+    return reward_matrix
+
+
+class DecisionNCELoss(torch.nn.Module):
+    def __init__(self, logit_scale=100, loss_type="DecisionNCE-T"):
+
+        super().__init__()
+        self.logit_scale = logit_scale
+        self.loss_type = loss_type  # 'DecisionNCE-T', 'DecisionNCE-P'
+
+    def get_reward_matrix(self, visual_features, text_features):
+        if self.loss_type == 'DecisionNCE-T':
+            return get_reward_matrix_T(
+                visual_features, text_features,
+                logit_scale=self.logit_scale
+            )
+        elif self.loss_type == 'DecisionNCE-P':
+            return get_reward_matrix_P(
+                visual_features, text_features,
+                logit_scale=self.logit_scale
+            )
+        else:
+            raise NotImplementedError
+
+    def forward(self, visual_features, text_features):
+        # visual_features: [bs, N, dim]
+        # text_features: [bs, dim]
+
+        batch_size = visual_features.shape[0]
+        reward_matrix = self.get_reward_matrix(visual_features, text_features)
+
+        labels = torch.arange(batch_size, device=reward_matrix.device).long()
+        return 0.5 * (F.cross_entropy(reward_matrix, labels) + F.cross_entropy(reward_matrix.t(), labels))
+
+
+class ParamDecisionNCELoss(torch.nn.Module):
+    def __init__(self, logit_scale=100, loss_type="DecisionNCE-T"):
+
+        super().__init__()
+        self.logit_scale = logit_scale
+        self.loss_type = loss_type  # 'DecisionNCE-T', 'DecisionNCE-P'
+
+        self.proj_1 = nn.Linear(4096, 4096, bias=False)
+        self.proj_2 = nn.Linear(3072, 4096, bias=False)
+
+        # self.v_proj = nn.Sequential(
+        #     nn.Linear(3072, 4096),
+        #     nn.GELU(),
+        #     nn.Linear(4096, 4096)
+        # )
+        # self.l_proj = nn.Sequential(
+        #     nn.Linear(4096, 4096),
+        #     nn.GELU(),
+        #     nn.Linear(4096, 4096),
+        # )
+
+    def get_reward_matrix(self, visual_features, text_features):
+        if self.loss_type == 'DecisionNCE-T':
+            return get_reward_matrix_T(
+                visual_features, text_features,
+                logit_scale=self.logit_scale
+            )
+        elif self.loss_type == 'DecisionNCE-P':
+            return get_reward_matrix_P(
+                visual_features, text_features,
+                logit_scale=self.logit_scale
+            )
+        else:
+            raise NotImplementedError
+
+    def forward(self, visual_features, text_features):
+        # visual_features: [bs, N, dim]
+        # text_features: [bs, dim]
+
+        visual_features = self.proj_1(visual_features)
+        text_features = self.proj_2(text_features)
+
+        batch_size = visual_features.shape[0]
+        reward_matrix = self.get_reward_matrix(visual_features, text_features)
+
+        labels = torch.arange(batch_size, device=reward_matrix.device).long()
+        return 0.5 * (F.cross_entropy(reward_matrix, labels) + F.cross_entropy(reward_matrix.t(), labels))
